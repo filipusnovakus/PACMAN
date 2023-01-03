@@ -3,10 +3,11 @@ package com.example.pacmangame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class Entity {
+public class Entity extends Rectangle {
 
     private double x;
     private double y;
@@ -37,17 +38,17 @@ public class Entity {
 
     public void update(ArrayList<String> input) {
         if (input.contains("w")) {
-            setY(getY() - velocity);
+            setY2(getY2() - velocity);
         }
 
         if (input.contains("s")) {
-            setY(getY() + velocity);
+            setY2(getY2() + velocity);
         }
         if (input.contains("a")) {
-            setX(getX() - velocity);
+            setX2(getX2() - velocity);
         }
         if (input.contains("d")) {
-            setX(getX() + velocity);
+            setX2(getX2() + velocity);
         }
     }
 
@@ -56,22 +57,22 @@ public class Entity {
         gc.fillRect(x, y, width, height);
     }
 
-    public double getX() {
+    public double getX2() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX2(double x) {
         this.x = x;
     }
 
-    public double getY() {
+    public double getY2() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY2(double y) {
         this.y = y;
     }
-
+/*
     public double getWidth() {
         return width;
     }
@@ -87,7 +88,7 @@ public class Entity {
     public void setHeight(double height) {
         this.height = height;
     }
-
+*/
     public Paint getColor() {
         return color;
     }

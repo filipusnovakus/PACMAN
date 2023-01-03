@@ -4,10 +4,11 @@ package com.example.pacmangame;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-public class Walls {
+public class Walls extends Rectangle {
 
     private double x;
     private double y;
@@ -30,58 +31,13 @@ public class Walls {
 
     }
 
-    public void update(ArrayList<String> input) {
-        if (input.contains("w")) {
-            setY(getY());
-        }
 
-        if (input.contains("s")) {
-            setY(getY());
-        }
-        if (input.contains("a")) {
-            setX(getX());
-        }
-        if (input.contains("d")) {
-            setX(getX());
-        }
-    }
 
     public void render(GraphicsContext gc) {
         gc.setFill(color);
         gc.fillRect(x, y, width, height);
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
-    }
 
     public Paint getColor() {
         return color;

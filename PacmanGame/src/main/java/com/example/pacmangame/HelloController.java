@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,19 +59,20 @@ public class HelloController implements Initializable {
     ArrayList<String> inputList;
     ArrayList<Entity> entitiesList;
     ArrayList<Walls> wallsList;
-    boolean block;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inputList = new ArrayList<>();
         entitiesList = new ArrayList<>();
-
+        wallsList = new ArrayList<>();
         gc = canvas.getGraphicsContext2D();
- block = false;
-if (canvas.equals(wall1)) {
-    block = true;
-}
 
-        wall1 = new Walls(40,80,80,90,Paint.valueOf("BLUE"));
+ //block = false;
+//if (canvas.equals(wall1)) {
+   // block = true;
+//}
+
+      wall1 = new Walls(40,80,80,90,Paint.valueOf("BLUE"));
         wall2 = new Walls(160,80,80,90,Paint.valueOf("BLUE"));
         wall3 = new Walls(340,80,80,90,Paint.valueOf("BLUE"));
         wall9 = new Walls(460, 80 , 80, 90,Paint.valueOf("BLUE"));
@@ -99,8 +101,10 @@ if (canvas.equals(wall1)) {
             public void handle(long now) {
                 //clear canvas
                 clearCanvas();
+                checkCollision(entity,wall1);
                 //update
                 update();
+
                 //render
                 render();
             }
@@ -124,25 +128,26 @@ if (canvas.equals(wall1)) {
         gc.setStroke(Paint.valueOf("BLUE")); //Object color
 
         gc.stroke();
-      // gc.rect(40, 80 , 80, 90);
-       // gc.rect(160, 80 , 80, 90);
-      //  gc.rect(340, 80 , 80, 90);
-        //gc.rect(460, 80 , 80, 90);
+        /*
+       Rectangle w1 = new Rectangle(40, 80 , 80, 90);
+       gc.rect(160, 80 , 80, 90);
+        gc.rect(340, 80 , 80, 90);
+        gc.rect(460, 80 , 80, 90);
         gc.setLineWidth(5);
-      //  gc.rect(40, 250 , 80, 90);
+      gc.rect(40, 250 , 80, 90);
 
-//        gc.rect(340, 250 , 80, 90);
-     //   gc.rect(460, 250 , 80, 90);
-      //  gc.rect(90, 500 , 130, 110);
-      //  gc.rect(290, 500 , 160, 110);
-       // gc.rect(640, 80 , 80, 90);
-      //  gc.rect(760, 80 , 80, 90);
-      //  gc.rect(640, 250 , 80, 90);
-      //  gc.rect(760, 250 , 80, 90);
-      //  gc.rect(760, 500 , 130, 110);
-      //  gc.rect(500, 500 , 160, 110);
+       gc.rect(340, 250 , 80, 90);
+       gc.rect(460, 250 , 80, 90);
+        gc.rect(90, 500 , 130, 110);
+        gc.rect(290, 500 , 160, 110);
+        gc.rect(640, 80 , 80, 90);
+        gc.rect(760, 80 , 80, 90);
+        gc.rect(640, 250 , 80, 90);
+        gc.rect(760, 250 , 80, 90);
+        gc.rect(760, 500 , 130, 110);
+        gc.rect(500, 500 , 160, 110);
 
-
+*/
     }
 
     public void update() {
@@ -179,14 +184,13 @@ if (canvas.equals(wall1)) {
         }
     }
 */
-    public void onMouseMove(MouseEvent mouseEvent) {
+    public void onMouseMove() {
        // if (gc.equals())
         gc.setFill(Paint.valueOf("BLACK"));
-        gc.fillOval(mouseEvent.getX(), mouseEvent.getY(), 5, 5);
+
     }
 
-    public void getCoords(MouseEvent mouseEvent) {
-        label.setText(String.valueOf(mouseEvent.getX()));
+    public void getCoords() {
     }
 
 
@@ -194,42 +198,51 @@ if (canvas.equals(wall1)) {
 
 
     // if (gc.equals(Paint.valueOf("BLACK"))){
-if (block = false){
+//if (block = false){
         if (!inputList.contains(keyEvent.getText())) {
             inputList.add(keyEvent.getText());
         }
 
 
         if (keyEvent.getText().equalsIgnoreCase("w")) {
-            entity.setY(entity.getY() - 1);
+            entity.setY2(entity.getY2() - 1);
 
         }
 
         if (keyEvent.getText().equalsIgnoreCase("s")) {
-            entity.setY(entity.getY() + 1);
+            entity.setY2(entity.getY2() + 1);
 
 
         }
         if (keyEvent.getText().equalsIgnoreCase("a")) {
-            entity.setX(entity.getX() - 1);
+            entity.setX2(entity.getX2() - 1);
 
         }
         if (keyEvent.getText().equalsIgnoreCase("d")) {
 
-            entity.setX(entity.getX() + 1);
+            entity.setX2(entity.getX2() + 1);
         }
 
         gc.setFill(Paint.valueOf("WHITE"));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         gc.setFill(entity.getColor());
-        gc.fillRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
+        gc.fillRect(entity.getX2(), entity.getY2(), entity.getWidth(), entity.getHeight());
 
-        }}
+        }
 
-  //  }
+
+
+
+
     public void keyReleased(KeyEvent keyEvent) {
         inputList.remove(keyEvent.getText());
     }
 
+    public void checkCollision(Entity entity, Walls wall2) {
 
+if  (entity.getBoundsInParent().intersects(wall2.getBoundsInParent())){
+    System.out.println("collision");
 }
+
+    }
+     }
