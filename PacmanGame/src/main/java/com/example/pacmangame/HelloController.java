@@ -59,9 +59,11 @@ public class HelloController implements Initializable {
     ArrayList<String> inputList;
     ArrayList<Entity> entitiesList;
     ArrayList<Walls> wallsList;
+  int block;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         inputList = new ArrayList<>();
         entitiesList = new ArrayList<>();
         wallsList = new ArrayList<>();
@@ -90,6 +92,8 @@ public class HelloController implements Initializable {
         wall16 = new Walls(760, 250 , 80, 90,Paint.valueOf("BLUE"));
         wall17 = new Walls(760, 500 , 130, 110,Paint.valueOf("BLUE"));
         wall18 = new Walls(500, 500 , 160, 110,Paint.valueOf("BLUE"));
+
+
         entity = new Entity(40,40,20,20, Paint.valueOf("YELLOW"), 5.1f);
 
         Platform.runLater(() -> {
@@ -100,20 +104,25 @@ public class HelloController implements Initializable {
             @Override
             public void handle(long now) {
                 //clear canvas
-                clearCanvas();
-                checkCollision(entity,wall1);
-                //update
-                update();
 
-                //render
+                clearCanvas();
                 render();
+                //update
+
+checkCollision(entity,wall2);
+
+                update();
+              //  blockRefresh();
+                //render
+
+
             }
         };
         mainLoop.start();
     }
 
     private void clearCanvas() {
-
+block = 0;
         gc.setFill(Paint.valueOf("BLACK"));
 
 
@@ -186,53 +195,25 @@ public class HelloController implements Initializable {
 */
     public void onMouseMove() {
        // if (gc.equals())
-        gc.setFill(Paint.valueOf("BLACK"));
+
+            gc.setFill(Paint.valueOf("BLACK"));
 
     }
 
     public void getCoords() {
     }
 
-
     public void keyPressed(KeyEvent keyEvent) {
 
 
     // if (gc.equals(Paint.valueOf("BLACK"))){
-//if (block = false){
+       // if  (!entity.rectangle2D().intersects(wall2.rectangle2D())){
+       if (block == 0){
         if (!inputList.contains(keyEvent.getText())) {
             inputList.add(keyEvent.getText());
         }
 
-
-        if (keyEvent.getText().equalsIgnoreCase("w")) {
-            entity.setY2(entity.getY2() - 1);
-
-        }
-
-        if (keyEvent.getText().equalsIgnoreCase("s")) {
-            entity.setY2(entity.getY2() + 1);
-
-
-        }
-        if (keyEvent.getText().equalsIgnoreCase("a")) {
-            entity.setX2(entity.getX2() - 1);
-
-        }
-        if (keyEvent.getText().equalsIgnoreCase("d")) {
-
-            entity.setX2(entity.getX2() + 1);
-        }
-
-        gc.setFill(Paint.valueOf("WHITE"));
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.setFill(entity.getColor());
-        gc.fillRect(entity.getX2(), entity.getY2(), entity.getWidth(), entity.getHeight());
-
-        }
-
-
-
-
+         }}
 
     public void keyReleased(KeyEvent keyEvent) {
         inputList.remove(keyEvent.getText());
@@ -240,9 +221,14 @@ public class HelloController implements Initializable {
 
     public void checkCollision(Entity entity, Walls wall2) {
 
-if  (entity.getBoundsInParent().intersects(wall2.getBoundsInParent())){
-    System.out.println("collision");
+if  (entity.rectangle2D().intersects(wall2.rectangle2D())){
+     block = 1;
 }
-
     }
-     }
+    }
+    /*
+public void blockRefresh (){
+        block = 0;
+}
+*/
+

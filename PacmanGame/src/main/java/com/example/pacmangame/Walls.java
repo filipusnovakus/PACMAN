@@ -1,6 +1,7 @@
 package com.example.pacmangame;
 
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
@@ -31,7 +32,9 @@ public class Walls extends Rectangle {
 
     }
 
-
+    public Rectangle2D rectangle2D() {
+        return new Rectangle2D(x, y, width, height);
+    }
 
     public void render(GraphicsContext gc) {
         gc.setFill(color);

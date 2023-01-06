@@ -1,5 +1,6 @@
 package com.example.pacmangame;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Paint;
@@ -36,7 +37,14 @@ public class Entity extends Rectangle {
         this.velocity = velocity;
     }
 
+    public Rectangle2D rectangle2D() {
+        return new Rectangle2D(x, y, width, height);
+    }
+
     public void update(ArrayList<String> input) {
+
+
+
         if (input.contains("w")) {
             setY2(getY2() - velocity);
         }
