@@ -55,6 +55,7 @@ public class HelloController implements Initializable {
     Walls wall17;
     Walls wall18;
     Entity entity;
+
     AnimationTimer mainLoop;
     ArrayList<String> inputList;
     ArrayList<Entity> entitiesList;
